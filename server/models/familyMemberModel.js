@@ -36,5 +36,5 @@ const familyMemberSchema = new mongoose.Schema({
   familySpaces: [{ type: Schema.Types.ObjectId, ref: "familySpace" }],
   memberSpaces: [{ type: Schema.Types.ObjectId, ref: "memberSpace" }],
 });
-const familyMember = mongoose.model("FamilyMember", familyMemberSchema);
+const familyMember = mongoose.model("familyMember", familyMemberSchema);
 module.exports = familyMember;
