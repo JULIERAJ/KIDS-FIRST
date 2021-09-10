@@ -3,14 +3,14 @@ const mongoose = require("mongoose");
 const familyMemberSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: true,
+    required: [true, "Enter your name please"],
     trim: true,
     unique: false,
     lowercase: true,
   },
   lastName: {
     type: String,
-    required: true,
+    required: [true, "Enter your last name please"],
     trim: true,
     unique: false,
     lowercase: true,
@@ -18,14 +18,14 @@ const familyMemberSchema = new mongoose.Schema({
   password: { type: String, required: true },
   dateOfBirth: {
     type: Date,
-    required: true,
+    required: [true, "Enter your date of birth please"],
     trim: true,
     unique: false,
     lowercase: true,
   },
   email: {
     type: String,
-    required: true,
+    required: [true, "Enter your email please"],
     unique: true,
     trim: true,
     lowercase: true,
