@@ -1,5 +1,6 @@
 var express = require("express");
 const jwt = require("jsonwebtoken");
+const bodyParser = require("body-parser");
 const {
   familyMember,
   parent,
@@ -8,7 +9,25 @@ const {
 const bcrypt = require("bcrypt");
 
 var router = express.Router();
+router.use(bodyParser.urlencoded({ extended: false }));
 
+const verifyJWT = (req, res, next) => {
+  console.log("token in verifyJWT", req.headers);
+  const token = req.headers("x-access-token");
+  if (!token) {
+    res.send("You're not autorised");
+  } else {
+    jwt.verify(token, "jwtSecret", (err, decoded) => {
+      if (err) {
+        res.json({ auth: false, message: "You failed to authenticate" });
+      } else {
+        console.log("decoded", decoded);
+        res.user = decoded;
+        next();
+      }
+    });
+  }
+};
 /* GET users listing. */
 router.get("/", function (req, res, next) {
   res.send("respond with a resource");
@@ -58,15 +77,17 @@ router.post("/api/users/login", async (req, res, error) => {
     }
   }
 });
-router.post("/api/users/update-my-profile", async (req, res, error) => {
-  const { firstName, lastName, dateOfBirth, email, isParent } = req.body;
+router.post("/api/users/update-my-profile", verifyJWT, (req, res) => {
+  console.log("token", verifyJWT, "body", req.body);
+  res.send("updated");
+  /*   const { firstName, lastName, dateOfBirth, email, isParent } = req.body;
 
-  const updatedDocument = await familyMember.findOneAndUpdate(
-    { email: email },
-    { firstName: "Jean-Luc Picard", isParent: isParent },
-    { new: true }
-  );
-  return res.status(200).send(updatedDocument);
+    const updatedDocument = await familyMember.findOneAndUpdate(
+      { email: email },
+      { firstName: "Jean-Luc Picard", isParent: isParent },
+      { new: true }
+    );
+    return res.status(200).send(updatedDocument);*/
 });
 
 module.exports = router;

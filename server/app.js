@@ -1,6 +1,7 @@
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
+const bodyparser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
@@ -12,7 +13,7 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const url = `mongodb+srv://saoussen:%40vera9e135@cluster0.507fy.mongodb.net/test`;
 const app = express();
-
+app.use(bodyparser.json());
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -22,11 +23,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/", usersRouter);
-app.use("/register", usersRouter);
-app.use("/login", usersRouter);
-app.use("/api/users", usersRouter);
 
+app.use("/api/users", usersRouter);
+app.use("/", indexRouter);
 //mongodb connection
 mongoose
   .connect(url, {
