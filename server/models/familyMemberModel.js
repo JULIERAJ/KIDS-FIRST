@@ -32,8 +32,40 @@ const familyMemberSchema = new mongoose.Schema({
   },
 
   isParent: { type: Boolean, default: false, required: true },
-  familySpaces: [{ type: mongoose.Schema.Types.ObjectId, ref: "familySpace" }],
-  memberSpaces: [{ type: mongoose.Schema.Types.ObjectId, ref: "memberSpace" }],
 });
 const familyMember = mongoose.model("familyMember", familyMemberSchema);
-module.exports = familyMember;
+const ParentSchema = new mongoose.Schema();
+const parent = familyMember.model("parent", ParentSchema);
+const ChildSchema = new mongoose.Schema({
+  height: {
+    type: Double,
+    required: false,
+    trim: true,
+    unique: false,
+    lowercase: true,
+  },
+  weight: {
+    type: Double,
+    required: false,
+    trim: true,
+    unique: false,
+    lowercase: true,
+  },
+  bloodType: {
+    type: String,
+    required: false,
+    trim: true,
+    unique: false,
+    lowercase: true,
+  },
+  clothingSize: {
+    type: String,
+    required: false,
+    trim: true,
+    unique: false,
+    lowercase: true,
+  },
+});
+const child = familyMember.model("child", ChildSchema);
+
+module.exports = { familyMember, parent, child };
