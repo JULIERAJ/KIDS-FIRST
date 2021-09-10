@@ -1,6 +1,10 @@
 var express = require("express");
 const jwt = require("jsonwebtoken");
-const familyMember = require("../models/familyMemberModel.js");
+const {
+  familyMember,
+  parent,
+  child,
+} = require("../models/familyMemberModel.js");
 const bcrypt = require("bcrypt");
 
 var router = express.Router();
@@ -10,7 +14,7 @@ router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
 
-router.post("/register", async (req, res) => {
+router.post("/api/users/register", async (req, res) => {
   const user = new familyMember({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -31,7 +35,7 @@ router.post("/register", async (req, res) => {
     isParent: createdUser.isParent,
   });
 });
-router.post("/login", async (req, res, error) => {
+router.post("/api/users/login", async (req, res, error) => {
   const { email, password } = req.body;
   console.log("hne", email, password);
 
@@ -53,6 +57,16 @@ router.post("/login", async (req, res, error) => {
       });
     }
   }
+});
+router.post("/api/users/update-my-profile", async (req, res, error) => {
+  const { firstName, lastName, dateOfBirth, email, isParent } = req.body;
+
+  const updatedDocument = await familyMember.findOneAndUpdate(
+    { email: email },
+    { firstName: "Jean-Luc Picard", isParent: isParent },
+    { new: true }
+  );
+  return res.status(200).send(updatedDocument);
 });
 
 module.exports = router;

@@ -35,17 +35,17 @@ const familyMemberSchema = new mongoose.Schema({
 });
 const familyMember = mongoose.model("familyMember", familyMemberSchema);
 const ParentSchema = new mongoose.Schema();
-const parent = familyMember.model("parent", ParentSchema);
+const parent = familyMember.discriminator("parent", ParentSchema);
 const ChildSchema = new mongoose.Schema({
   height: {
-    type: Double,
+    type: mongoose.Schema.Types.Decimal128,
     required: false,
     trim: true,
     unique: false,
     lowercase: true,
   },
   weight: {
-    type: Double,
+    type: mongoose.Schema.Types.Decimal128,
     required: false,
     trim: true,
     unique: false,
@@ -66,6 +66,6 @@ const ChildSchema = new mongoose.Schema({
     lowercase: true,
   },
 });
-const child = familyMember.model("child", ChildSchema);
+const child = familyMember.discriminator("child", ChildSchema);
 
 module.exports = { familyMember, parent, child };
