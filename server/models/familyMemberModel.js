@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const familyMemberSchema = new mongoose.Schema({
-  _id: Schema.Types.ObjectId,
   firstName: {
     type: String,
     required: true,
@@ -33,8 +32,8 @@ const familyMemberSchema = new mongoose.Schema({
   },
 
   isParent: { type: Boolean, default: false, required: true },
-  familySpaces: [{ type: Schema.Types.ObjectId, ref: "familySpace" }],
-  memberSpaces: [{ type: Schema.Types.ObjectId, ref: "memberSpace" }],
+  familySpaces: [{ type: mongoose.Schema.Types.ObjectId, ref: "familySpace" }],
+  memberSpaces: [{ type: mongoose.Schema.Types.ObjectId, ref: "memberSpace" }],
 });
 const familyMember = mongoose.model("familyMember", familyMemberSchema);
 module.exports = familyMember;
