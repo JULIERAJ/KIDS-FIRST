@@ -9,15 +9,15 @@ const {
 const bcrypt = require("bcrypt");
 
 var router = express.Router();
-router.use(bodyParser.urlencoded({ extended: false }));
 
 const verifyJWT = (req, res, next) => {
-  console.log("token in verifyJWT", req.headers);
-  const token = req.headers("x-access-token");
+  console.log("token in verifyJWT", req.headers["postman-token"]);
+  const token = req.headers["postman-token"];
   if (!token) {
     res.send("You're not autorised");
   } else {
     jwt.verify(token, "jwtSecret", (err, decoded) => {
+      console.log("error is", err, "decoded is", decoded);
       if (err) {
         res.json({ auth: false, message: "You failed to authenticate" });
       } else {
@@ -33,7 +33,15 @@ router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
 
-router.post("/api/users/register", async (req, res) => {
+router.post("/register", async (req, res) => {
+  //check the db to see if you user already exists
+  //if the user doesn't exist, create it and store it in the the db
+  const oldUser = await familyMember.findOne({
+    email: req.body.email,
+  });
+  if (oldUser) {
+    res.send("You are already registered");
+  }
   const user = new familyMember({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -42,9 +50,8 @@ router.post("/api/users/register", async (req, res) => {
     password: bcrypt.hashSync(req.body.password, 8),
     isParent: req.body.isParent,
   });
-  console.log("user", user);
   const createdUser = await user.save();
-  console.log("created user", createdUser);
+
   res.send({
     _id: createdUser._id,
     firstName: createdUser.firstName,
@@ -54,30 +61,29 @@ router.post("/api/users/register", async (req, res) => {
     isParent: createdUser.isParent,
   });
 });
-router.post("/api/users/login", async (req, res, error) => {
+router.post("/login", async (req, res, error) => {
+  //check the db to see if the user exists
+  //if he exists, check the correctness of his pwd
+  //if the password is correct assign an authenctication token to him/her
   const { email, password } = req.body;
-  console.log("hne", email, password);
 
   const user = await familyMember.findOne({
     email: email,
   });
 
-  const identicalPwd = await bcrypt.compare(password, user.password);
-
   if (!user) {
     res.send({ auth: false, message: "User doesn't exist" });
   } else {
+    const identicalPwd = await bcrypt.compare(password, user.password);
     if (!identicalPwd) {
       res.send({ auth: false, message: "Password is incorrect" });
     } else {
       res.send(user);
-      const token = jwt.sign({ user }, "jwtSecret", {
-        expiresIn: 360,
-      });
+      const token = jwt.sign({ user }, "jwtSecret", {});
     }
   }
 });
-router.post("/api/users/update-my-profile", verifyJWT, (req, res) => {
+router.post("/update-my-profile", verifyJWT, (req, res) => {
   console.log("token", verifyJWT, "body", req.body);
   res.send("updated");
   /*   const { firstName, lastName, dateOfBirth, email, isParent } = req.body;

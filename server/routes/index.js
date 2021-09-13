@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongo = require("mongodb");
-const { familyMember } = require("../models/familyMemberModel");
+const familyMember = require("../models/familyMemberModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 //const { familyMember, familySpace, memberSpace } = db;
