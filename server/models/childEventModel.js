@@ -11,6 +11,6 @@ const childEventSchema = new mongoose.Schema({
   },
 });
 
-const event = mongoose.model("event", eventSchema);
+const childEvent = mongoose.model("childEvent", childEventSchema);
 
-module.exports = event;
+module.exports = childEvent;
