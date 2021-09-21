@@ -15,14 +15,7 @@ const familyMemberSchema = new mongoose.Schema({
     unique: false,
     lowercase: true,
   },
-  password: { type: String, required: true },
-  dateOfBirth: {
-    type: Date,
-    required: [true, "Enter your date of birth please"],
-    trim: true,
-    unique: false,
-    lowercase: true,
-  },
+ 
   email: {
     type: String,
     required: [true, "Enter your email please"],
@@ -30,6 +23,14 @@ const familyMemberSchema = new mongoose.Schema({
     trim: true,
     lowercase: true,
   },
+  dateOfBirth: {
+    type: String,
+    required: [true, "Enter your date of birth please"],
+    trim: true,
+    unique: false,
+    lowercase: true,
+  },
+  password: { type: String, required: true },
 
   isParent: { type: Boolean, default: false, required: true },
 });
