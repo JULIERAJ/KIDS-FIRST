@@ -1,6 +1,6 @@
 var express = require("express");
 const jwt = require("jsonwebtoken");
-const bodyParser = require("body-parser");
+const generateToken = require('../utils.js');
 const {
   familyMember,
   parent,
@@ -10,28 +10,29 @@ const bcrypt = require("bcrypt");
 
 var router = express.Router();
 
-const verifyJWT = (req, res, next) => {
-  console.log("token in verifyJWT", req.headers["postman-token"]);
-  const token = req.headers["postman-token"];
-  if (!token) {
-    res.send("You're not autorised");
-  } else {
-    jwt.verify(token, "jwtSecret", (err, decoded) => {
-      console.log("error is", err, "decoded is", decoded);
-      if (err) {
-        res.json({ auth: false, message: "You failed to authenticate" });
-      } else {
-        console.log("decoded", decoded);
-        res.user = decoded;
-        next();
-      }
-    });
-  }
-};
+// const verifyJWT = (req, res, next) => {
+//   console.log("token in verifyJWT", req.headers["postman-token"]);
+//   const token = req.headers["postman-token"];
+//   if (!token) {
+//     res.send("You're not autorised");
+//   } else {
+//     jwt.verify(token, "jwtSecret", (err, decoded) => {
+//       console.log("error is", err, "decoded is", decoded);
+//       if (err) {
+//         res.json({ auth: false, message: "You failed to authenticate" });
+//       } else {
+//         console.log("decoded", decoded);
+//         res.user = decoded;
+//         next();
+//       }
+//     });
+//   }
+// };
 /* GET users listing. */
 router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
+
 
 router.post("/register", async (req, res) => {
   //check the db to see if you user already exists
@@ -54,46 +55,92 @@ router.post("/register", async (req, res) => {
 
   res.send({
     _id: createdUser._id,
-    firstName: createdUser.firstName,
-    lastName: createdUser.lastName,
+    name: createdUser.name,
     email: createdUser.email,
-    dateOfBirth: createdUser.dateOfBirth,
     isParent: createdUser.isParent,
+    token: generateToken(createdUser),
   });
 });
+
+
+
+
+
+
 router.post("/login", async (req, res, error) => {
   //check the db to see if the user exists
   //if he exists, check the correctness of his pwd
   //if the password is correct assign an authenctication token to him/her
-  const { email, password } = req.body;
-
-  const user = await familyMember.findOne({
-    email: email,
-  });
-
-  if (!user) {
-    res.send({ auth: false, message: "User doesn't exist" });
-  } else {
-    const identicalPwd = await bcrypt.compare(password, user.password);
-    if (!identicalPwd) {
-      res.send({ auth: false, message: "Password is incorrect" });
-    } else {
-      res.send(user);
-      const token = jwt.sign({ user }, "jwtSecret", {});
+  const user = await familyMember.findOne({ email: req.body.email });
+  if (user) {
+    if (bcrypt.compareSync(req.body.password, user.password)) {
+      res.send({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isParent: user.isParent,
+        token: generateToken(user),
+      });
+      return;
     }
   }
+  res.status(401).send({ message: 'Invalid email or password' });
 });
-router.post("/update-my-profile", verifyJWT, (req, res) => {
-  console.log("token", verifyJWT, "body", req.body);
-  res.send("updated");
-  /*   const { firstName, lastName, dateOfBirth, email, isParent } = req.body;
 
-    const updatedDocument = await familyMember.findOneAndUpdate(
-      { email: email },
-      { firstName: "Jean-Luc Picard", isParent: isParent },
-      { new: true }
-    );
-    return res.status(200).send(updatedDocument);*/
-});
+
+
+router.put('/:id',async(req, res) => {
+    const user = await familyMember.findById(req.params.id);
+    if (user) {
+      user.firstName = req.body.firstName;
+      user.lastName = req.body.lastName;
+      user.dateOfBirth = req.body.dateOfBirth;
+      user.email = req.body.email;
+      user.password = req.body.password;
+
+      const updateduser = await user.save();
+      res.send({ message: 'user Updated', user: updateduser });
+    } else {
+      res.status(404).send({ message: 'user Not Found' });
+    }
+  }
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// router.post("/update-my-profile", verifyJWT, (req, res) => {
+//   console.log("token", verifyJWT, "body", req.body);
+//   res.send("updated");
+//   /*   const { firstName, lastName, dateOfBirth, email, isParent } = req.body;
+
+//     const updatedDocument = await familyMember.findOneAndUpdate(
+//       { email: email },
+//       { firstName: "Jean-Luc Picard", isParent: isParent },
+//       { new: true }
+//     );
+//     return res.status(200).send(updatedDocument);*/
+// });
 
 module.exports = router;
