@@ -4,7 +4,7 @@ import Axios from 'axios';
 export const signin = (email, password,is_parent) => async (dispatch) => {
   dispatch({ type: "USER_SIGNIN_REQUEST", payload: { email, password,is_parent } });
   try {
-    const { data } = await Axios.post('/api/users/signin', { email, password,is_parent });
+    const { data } = await Axios.post('http://localhost:3001/api/users/signin', { email, password,is_parent });
     dispatch({ type: "USER_SIGNIN_SUCCESS", payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
@@ -21,7 +21,7 @@ export const signin = (email, password,is_parent) => async (dispatch) => {
 export const register = (email, password,is_parent) => async (dispatch) => {
   dispatch({ type: "USER_REGISTER_REQUEST", payload: email, password,is_parent });
   try {
-    const { data } = await Axios.post('/api/users/parent/register', {email, password,is_parent});
+    const { data } = await Axios.post('http://localhost:3001/api/users/parent/register', {email, password,is_parent});
     dispatch({ type: "USER_REGISTER_SUCCESS", payload: data });
     //dispatch({ type: "USER_SIGNIN_SUCCESS", payload: data });
     localStorage.setItem('userInfo', JSON.stringify(data));
@@ -41,7 +41,7 @@ export const updateUserInfo = (user) => async (dispatch) => {
   dispatch({ type: "USER_UPDATE_PROFILE_REQUEST", payload: user });
 
   try {
-    const { data } = await Axios.put(`/api/users/${user.id}`, user);
+    const { data } = await Axios.put(`http://localhost:3001/api/users/${user.id}`, user);
     dispatch({ type: "USER_UPDATE_SUCCESS", payload: data });
   } catch (error) {
     const message =
@@ -59,7 +59,7 @@ export const registerCoparent = (firstName, lastName, email, is_co_parent,create
     userRegister: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.post('/api/users/coParent/register', {firstName, lastName, email, is_co_parent,createBy});
+    const { data } = await Axios.post('http://localhost:3001/api/users/coParent/register', {firstName, lastName, email, is_co_parent,createBy});
     dispatch({ type: "Coparent_REGISTER_SUCCESS", payload: data });
   } catch (error) {
     dispatch({
@@ -80,7 +80,7 @@ export const registerChild = (firstName,is_child, createBy) => async (dispatch, 
     userRegister: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.post('/api/users/child/register', {firstName,is_child, createBy});
+    const { data } = await Axios.post('http://localhost:3001/api/users/child/register', {firstName,is_child, createBy});
     dispatch({ type: "Child_REGISTER_SUCCESS", payload: data });
   } catch (error) {
     dispatch({
