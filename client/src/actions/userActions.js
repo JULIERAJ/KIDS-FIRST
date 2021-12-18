@@ -1,6 +1,6 @@
 import Axios from 'axios';
 const process = require('process');
-const BACKEND_URL = process.env.BACKEND_URL
+const BACKEND_URL = "https://childfirst-api.herokuapp.com";
 
 export const signin = (email, password,is_parent) => async (dispatch) => {
   dispatch({ type: "USER_SIGNIN_REQUEST", payload: { email, password,is_parent } });
