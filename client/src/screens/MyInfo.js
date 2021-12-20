@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
+import { Navbar, Tabs, Tab, ButtonGroup, Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import logo from '../img/kids_first_logo_beta.png'
 import my_info_placeholder from '../img/my-info-placeholder.png'
 import { updateUserInfo } from '../actions/userActions';
-
-
 
 export default function MyInfo(props) {
     const [firstName, setFirstName] = useState('');
@@ -27,62 +26,76 @@ export default function MyInfo(props) {
         props.history.push('/Signup');
     };
 
-
     return (
-        <div>
-            <header>
-                <div class="site-header">
-                    <img src={logo} alt="" />
-                    <div class="header-title">Welcome...</div>
-                </div>
-            </header>
-            <div class="profile-tabs">
-                <ul class="nav nav-tabs nav-fill" id="accountInfoTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active profile-header" id="my_info_tab" data-bs-toggle="tab" data-bs-target="#"
-                            type="button" role="tab" aria-controls="my_info" aria-selected="true">My Information</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link disabled profile-header" id="co-parent_info_tab" data-bs-toggle="tab"
-                            data-bs-target="#profile" type="button" role="tab" aria-controls="co-parent_info"
-                            aria-selected="false">Co-parent Information</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link disabled profile-header" id="child_info_tab" data-bs-toggle="tab"
-                            data-bs-target="#contact" type="button" role="tab" aria-controls="child_info" aria-selected="false">Child
-                            Information</button>
-                    </li>
-                </ul>
-                <div class="tab-content" id="accountInfoTabContent">
-                    <div class="tab-pane show active" id="my_info" role="tabpanel" aria-labelledby="my_info_tab">
+        <>
+            <Navbar>
+                <Navbar.Brand href="/" className="profile-update-header"><img src={logo} className="logo" alt="" />Welcome!</Navbar.Brand>
+            </Navbar>
+            <Tabs fill justify defaultActiveKey="myInfo" className="profile-tabs">
+                <Tab eventKey="myInfo" title="My Information" className="profile-header">
+                    <Tab.Pane className="active-profile-update" id="myInfo" active>
                         <div class="profile-form col-4">
-                            <form class="info-form" onSubmit={submitHandler}>
-                                <div class="flex-item">
-                                    <div class="mb-2">
-                                        <label for="userFirstName" class="form-label">First name</label>
-                                        <input type="text" class="form-control" id="userFirstName" onChange={(e) => setFirstName(e.target.value)}  />
-                                    </div>
-                                    <div class="mb-2">
-                                        <label for="userLastName" class="form-label">Last name</label>
-                                        <input type="text" class="form-control" id="userLastName" onChange={(e) => setLastName(e.target.value)}  />
-                                    </div>
-                                    <div class="mb-2">
-                                        <label for="userDob" class="form-label">Date of birth (optional)</label>
-                                        <input type="date" class="form-control" id="userDob" onChange={(e) => setDateOfBirth(e.target.value)} />
-                                    </div>
-                                </div>
-                                <div class="profile-nav-buttons">
-                                    <button type="button" class="btn" id="back-btn" onClick={handleBack}>Back</button>
-                                    <button type="submit" class="btn" id="next-btn" >Next step</button>
-                                </div>
-                            </form>
+                            <MyInfoForm />
                         </div>
-                        <div class="placeholder-photo col-8">
+                        <div class="placeholder-photo placeholder-photo-bottom col-8">
                             <img src={my_info_placeholder} alt="" />
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </Tab.Pane>
+                </Tab>
+                <Tab eventKey="coParentInfo" title="Invite Co-parent" className="profile-header" disabled></Tab>
+                <Tab eventKey="childInfo" title="Child Information" className="profile-header" disabled></Tab>                
+            </Tabs>
+        </>
     )
+}
+
+class MyInfoForm extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+          firstName: "",
+          lastName: "",
+          dateOfBirth: "",
+          invalidForm: true
+        };
+    }
+
+    firstNameHandle(e) {
+        this.setState({ firstName: e.target.value })
+        this.setState({ invalidForm: !(this.state.firstName && this.state.lastName) })
+    }
+
+    lastNameHandle(e) {
+        this.setState({ lastName: e.target.value })
+        this.setState({ invalidForm: !(this.state.firstName && this.state.lastName) })
+    }
+    
+    dateOfBirthHandle(e) {
+        this.setState({ dateOfBirth: e.target.value })
+    }
+
+    render() {
+        return (
+            <Form className="info-form" method="post">
+                <div>
+                    <Form.Group className="form-inputs mb-2">
+                        <label for="userFirstName" class="form-label">First name</label>
+                        <input type="text" class="form-input" id="userFirstName" placeholder="Enter your First Name" value={this.state.firstName} onChange={this.firstNameHandle.bind(this)} required />
+                    </Form.Group>
+                    <Form.Group className="form-inputs mb-2">
+                        <label for="userLastName" class="form-label">Last name</label>
+                        <input type="text" class="form-input" id="userLastName" placeholder="Enter your Last Name" value={this.state.lastName} onChange={this.lastNameHandle.bind(this)} required />
+                    </Form.Group>
+                    <Form.Group className="form-inputs mb-2">
+                        <label for="userDob" class="form-label"  >Date of birth (optional)</label>
+                        <input type="date" class="form-input" id="userDob" value={this.state.dateOfBirth} onChange={this.dateOfBirthHandle.bind(this)} />
+                    </Form.Group>
+                </div>
+                <ButtonGroup className="profile-nav-buttons">
+                    <Button className="back-btn" disabled>Back</Button>
+                    <Button type="submit" className="next-btn" href="/CoParentInfo" disabled={this.state.invalidForm}>Next step</Button>
+                </ButtonGroup>
+            </Form>
+        )
+    }
 }

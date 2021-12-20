@@ -1,5 +1,4 @@
 <h1 align = "center"> 
-
 KIDS FIRST
 </h1>
  <h2 align = "center">Co=parenting made easier!</h2>
@@ -14,7 +13,6 @@ KIDS FIRST
   <img src="https://img.shields.io/github/languages/count/JULIERAJ/KIDS-FIRST?color=green&label=Languages&logo=github&logoColor=green">
   <img src="https://img.shields.io/github/languages/top/JULIERAJ/KIDS-FIRST?color=blue&label=ReactJS&logo=react&logoColor=white">
   <img src="https://img.shields.io/github/repo-size/JULIERAJ/KIDS-FIRST?color=purple&label=Repo%20Size&logo=github&logoColor=yellow">
-                                                                              
 </p>
 
 ## Table of Contents

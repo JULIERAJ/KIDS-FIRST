@@ -55,16 +55,16 @@ export const updateUserInfo = (user) => async (dispatch) => {
 
 
 export const registerCoparent = (firstName, lastName, email, is_co_parent,createBy) => async (dispatch, getState) => {
-  dispatch({ type: "Coparent_REGISTER_REQUEST", payload: firstName, lastName, email, is_co_parent ,createBy});
+  dispatch({ type: "COPARENT_REGISTER_REQUEST", payload: firstName, lastName, email, is_co_parent ,createBy});
   const {
     userRegister: { userInfo },
   } = getState();
   try {
     const { data } = await Axios.post(`${BACKEND_URL}/api/users/coParent/register`, {firstName, lastName, email, is_co_parent,createBy});
-    dispatch({ type: "Coparent_REGISTER_SUCCESS", payload: data });
+    dispatch({ type: "COPARENT_REGISTER_SUCCESS", payload: data });
   } catch (error) {
     dispatch({
-      type: "Coparent_REGISTER_FAIL",
+      type: "COPARENT_REGISTER_FAIL",
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -76,16 +76,16 @@ export const registerCoparent = (firstName, lastName, email, is_co_parent,create
 
 
 export const registerChild = (firstName,is_child, createBy) => async (dispatch, getState) => {
-  dispatch({ type: "Child_REGISTER_REQUEST", payload:firstName,is_child, createBy});
+  dispatch({ type: "CHILD_REGISTER_REQUEST", payload:firstName,is_child, createBy});
   const {
     userRegister: { userInfo },
   } = getState();
   try {
     const { data } = await Axios.post(`${BACKEND_URL}/api/users/child/register`, {firstName,is_child, createBy});
-    dispatch({ type: "Child_REGISTER_SUCCESS", payload: data });
+    dispatch({ type: "CHILD_REGISTER_SUCCESS", payload: data });
   } catch (error) {
     dispatch({
-      type: "Child_REGISTER_FAIL",
+      type: "CHILD_REGISTER_FAIL",
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
