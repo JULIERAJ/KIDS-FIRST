@@ -30,7 +30,7 @@ app.use('/api/users', usersRouter);
 
 //mongodb connection
 mongoose.connect(
-  `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@cluster0.amlpj.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority`,
+  `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@${process.env.MONGO_DB_HOST}/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority`,
   {
      useNewUrlParser: true,
       useUnifiedTopology: true,
