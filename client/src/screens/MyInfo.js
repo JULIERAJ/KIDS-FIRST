@@ -4,8 +4,6 @@ import logo from '../img/kids_first_logo_beta.png'
 import my_info_placeholder from '../img/my-info-placeholder.png'
 import { updateUserInfo } from '../actions/userActions';
 
-
-
 export default function MyInfo(props) {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -57,22 +55,22 @@ export default function MyInfo(props) {
                         <div className="profile-form col-4">
                             <form className="info-form" onSubmit={submitHandler}>
                                 <div className="flex-item">
-                                    <div className="mb-2">
+                                    <div className="mb-2 form-inputs-profile">
                                         <label for="userFirstName" className="form-label">First name</label>
                                         <input 
                                             type="text" minlength={1} maxLength={16} 
-                                            className="form-control form-input-profile" 
+                                            className="form-input" 
                                             id="userFirstName"  
                                             onChange={(e) => setFirstName(e.target.value)}
                                             required/>
                                     </div>
-                                    <div className="mb-2">
+                                    <div className="mb-2 form-inputs-profile">
                                         <label for="userLastName" className="form-label">Last name</label>
-                                        <input type="text" minlength={1} maxLength={16} className="form-control form-input-profile" id="userLastName"  onChange={(e) => setLastName(e.target.value)} required />
+                                        <input type="text" minlength={1} maxLength={16} className="form-input" id="userLastName"  onChange={(e) => setLastName(e.target.value)} required />
                                     </div>
-                                    <div className="mb-2">
+                                    <div className="mb-2 form-inputs-profile">
                                         <label for="userDob" className="form-label">Date of birth (optional)</label>
-                                        <input type="date" className="form-control"  id="userDob" onChange={(e) => setDateOfBirth(e.target.value)} />
+                                        <input type="date" className="form-input"  id="userDob" onChange={(e) => setDateOfBirth(e.target.value)} />
                                     </div>
                                 </div>
                                 <div className="profile-nav-buttons">

@@ -18,14 +18,13 @@ export default function Signup(props) {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert('Password and confirm password are not match');
+      alert('Password and confirm password are not matching');
     }
     else {
       dispatch(register(email, password, is_parent));
       props.history.push('/MyInfo');
     }
   };
-
 
   return (
     <>
@@ -57,6 +56,7 @@ export default function Signup(props) {
                 className='form-input'
                 type='email'
                 name='email'
+                placeholder="example@email.com"
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -66,6 +66,8 @@ export default function Signup(props) {
                 className='form-input'
                 type='password'
                 name='password'
+                minlength={8} 
+                maxLength={20}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
@@ -75,13 +77,14 @@ export default function Signup(props) {
                 className='form-input'
                 type='password'
                 name='password2'
+                minlength={8} 
+                maxLength={20}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
-            <button className='form-input-btn' type='submit'>
+            <button className='form-input-btn' disabled={!(email && password && confirmPassword)} type='submit'>
               <p className="signup-form">Sign up</p>
             </button>
-
           </form>
         </div>
       </div>

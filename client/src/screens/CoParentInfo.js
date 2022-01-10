@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';import logo from '../img/kids_first_logo_beta.png'
 import coparent_info_placeholder from '../img/coparent-info-placeholder.png'
@@ -67,20 +66,18 @@ export default function CoParentInfo(props) {
             <div className="profile-form col-4">
               <form className="info-form" onSubmit={submitHandler}>
                 <div className="flex-item">
-                  <div className="mb-2">
-                    <label for="co-parentFirstName" className="form-label-profile">First name</label>
-                    <input type="text"  minlength={1} maxLength={16} className="form-control form-input-profile" id="co-parentFirstName" disabled={checkBoxValue} onChange={(e) => setFirstName(e.target.value)} />
+                  <div className="mb-2 form-inputs-profile ">
+                    <label for="co-parentFirstName" className="form-label">First name</label>
+                    <input type="text"  minlength={1} maxLength={16} className="form-input" id="co-parentFirstName" disabled={checkBoxValue} onChange={(e) => setFirstName(e.target.value)} />
                   </div>
-                  <div className="mb-2">
-                    <label for="co-parentLastName" className="form-label-profile">Last name</label>
-                    <input type="text" minlength={1} maxLength={16} className="form-control form-input-profile" id="co-parentLastName" disabled={checkBoxValue} onChange={(e) => setLastName(e.target.value)}  />
+                  <div className="mb-2 form-inputs-profile">
+                    <label for="co-parentLastName" className="form-label">Last name</label>
+                    <input type="text" minlength={1} maxLength={16} className="form-input" disabled={checkBoxValue} onChange={(e) => setLastName(e.target.value)}  />
                   </div>
-                  <div className="mb-2">
-                    <label for="co-parentEmail" className="form-label-profile">Email</label>
-                    <input type="email" className="form-control form-input-profile" id="co-parentEmail"  placeholder="example@email.com" disabled={checkBoxValue} onChange={(e) => setEmail(e.target.value)} />
+                  <div className="mb-2 form-inputs-profile">
+                    <label for="co-parentEmail" className="form-label">Email</label>
+                    <input type="email" className="form-input" id="co-parentEmail" placeholder="example@email.com" disabled={checkBoxValue} onChange={(e) => setEmail(e.target.value)} />
                   </div>
-
-
                   <div className="mb-3 form-check-invite">
                     <input type="checkbox" className="form-check-input" id="co-parentCheck" checked={checkBoxValue} onChange={handleCheckBox}/>
                     <label className="form-check-label" for="co-parentCheck">Skip this step and invite co-parent</label>

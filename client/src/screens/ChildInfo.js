@@ -77,21 +77,18 @@ export default function ChildInfo(props) {
                 <div className="flex-item" key={index}>
                                 {
                 index ? 
-                <div className="extra-child">
+                <div className="extra-child ">
 
-                <div className="delete-child">
+                <div className="delete-child ">
                     <input type="button" id="deleteChildCheck"onClick={() => removeFormFields(index)} />
                 </div>
                 </div>
                 : null
               }
-                  <div className="mb-2">
+                  <div className="mb-2 form-inputs-profile">
                     <label for="childFirstName" className="form-label">Child name</label>
-                    <input type="text" name="childFirstName" minlength={1} maxLength={20} className="form-control form-input-profile" id="childFirstName"  onChange={e => handleChange(index, e)} />
+                    <input className="form-input" type="text" name="childFirstName" minlength={1} maxLength={20} id="childFirstName"  onChange={e => handleChange(index, e)} />
                   </div>
-                  
-
-              
             </div>
           ))}
               <div className="mb-3 form-check-addchild">
