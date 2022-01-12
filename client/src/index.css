@@ -392,14 +392,13 @@ footer a, footer a:hover {
   height: 603px;
   left: 150px;
   top: 137px;
-  position: absolute;
 }
      
-  .form-content-right {
-    border-radius: 0 10px 10px 0;
-    position: relative;
-    background: #F8F6E4;
-  }
+.form-content-right {
+  border-radius: 0 10px 10px 0;
+  position: relative;
+  background: #F8F6E4;
+}
     
 .form {
   position: absolute;
@@ -428,17 +427,6 @@ footer a, footer a:hover {
   margin-bottom: 1rem;
   width: 305px;
 }
-    
-  /*.form-label {
-    display: inline-block;
-    font-size: 0.8rem;
-    margin-bottom: 6px;
-    color: #000;
-    font-family: Arial;
-    font-weight: 500;
-    
-
-  }*/
     
 .form-label{
   font-family: Arial;
@@ -606,7 +594,67 @@ footer a, footer a:hover {
   text-decoration: none;
   color: #F08324  !important;
 }
-  
+
+ /* verify email */
+
+.verify-content-right {
+  border-radius: 0 10px 10px 0;
+  position: relative;
+  background: #F8F6E4;
+}
+
+.verify {
+  position: absolute;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0px 32px;
+}
+
+.verify-h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight:500;
+  line-height: 42px;
+  color: #000000;
+}
+
+.verify-img {
+  left: 69.1%;
+  right: 24.65%;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.verify-p{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 25px;
+/* or 139% */
+  color: #000000;
+  margin-top:50px;
+  margin-bottom: 88px;
+
+}
+.verify-resend{
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  text-decoration: none;
+  /* identical to box height */
+  color: #F08324;
+}
+
+#a-tag:hover{
+  color: #F08324;
+}
 
   /* update profile */
 .form-check-input:checked {
@@ -619,13 +667,6 @@ footer a, footer a:hover {
   background: #000 !important;
   color: #000 !important;
 }
-
-/*.site-header {
-  display: flex;
-  align-items: center;
-  margin: 20px 80px;
-  gap: 15px;
-}*/
 
 .header-profile{
     height:50px;
@@ -640,13 +681,6 @@ footer a, footer a:hover {
     top: 0px;
     
 }
-
-
-
-/*.header-title {
-  font-size: 36px;
-  line-height: 42px;
-}*/
 
 .header-title{
   position: absolute;
@@ -671,8 +705,6 @@ footer a, footer a:hover {
   font-size: 28px;
   line-height: 50px;
 }
-
-
 
 @media only screen and (max-width: 1024px) {
   .profile-header {
@@ -746,59 +778,6 @@ footer a, footer a:hover {
   height: 100%;
 }
 
-
-/*.form-control {
-  padding: 9px 12px;
-  border-radius: 12px;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.04), 0 2px 5px 0 rgba(0, 0, 0, 0.08);
-  border: solid 1px rgba(60, 66, 87, 0.5);
-  height: 40px;
-  font-family: Arial;
-  width: 250px !important;
-}*/
-
-/*.form-label {
-  margin-bottom: 8px;
-  font-family: Arial;
-}*/
-
-
-/*.form-check-invite {
-  margin-top: 250px;
-}*/
-
-
-
-
-
-
-/*.form-check-label-addchild{
-  
-    width: 310px;
-    height: 21px;
-    left: 176px;
-    top: 400px;
-    
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 21px;
-
-    
-    color: #3E3D36;
-    
-    }*/
-    
-
-    
-    
-    /*.form-check-label {
-    margin-left: 10px;
-    font-size: 13.5px;
-    color: #3e3d36;
-    }*/
- 
 .form-check-addchild {
   margin-top: 50px;
 }

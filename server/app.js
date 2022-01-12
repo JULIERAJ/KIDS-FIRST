@@ -29,17 +29,8 @@ app.use('/api/users', usersRouter);
 
 
 //mongodb connection
-mongoose.connect(
-  `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@cluster0.amlpj.mongodb.net/${process.env.MONGO_DB_DATABASE}?retryWrites=true&w=majority`,
-  {
-     useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-  }
-).then(() => {
-  console.log('Database connected')
-});
+mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/kidsfirst');
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -22,7 +22,7 @@ export default function Signup(props) {
     }
     else {
       dispatch(register(email, password, is_parent));
-      props.history.push('/MyInfo');
+      props.history.push('/verify');
     }
   };
 
@@ -65,9 +65,9 @@ export default function Signup(props) {
               <input
                 className='form-input'
                 type='password'
-                name='password'
-                minlength={8} 
-                maxLength={20}
+                name='password'                
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$"
+                placeholder="********"
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
@@ -77,8 +77,8 @@ export default function Signup(props) {
                 className='form-input'
                 type='password'
                 name='password2'
-                minlength={8} 
-                maxLength={20}
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$"
+                placeholder="********"
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
@@ -89,6 +89,5 @@ export default function Signup(props) {
         </div>
       </div>
     </>
-
   )
 }
