@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import logo from '../img/kids_first_logo_beta.png'
 import verify_img from '../img/verify-img.png'
 import signup from '../img/signup.png';
@@ -11,7 +11,10 @@ export default function Verify(props) {
   const [email, setEmail] = useState('');
   const [is_parent, setIs_parent] = useState(true);
 
+  const userRegister = useSelector((state) => state.userRegister);
+  const { userInfo } = userRegister;
   const dispatch = useDispatch();
+
   const submitHandler = (e) => {
     e.preventDefault();
         dispatch(register(email, is_parent));
@@ -34,8 +37,6 @@ export default function Verify(props) {
         <div className='form-content-left'>
           <img className='form-img' src={signup} alt='spaceship' />
         </div>
-
-
         <div className='verify-content-right'>
              <div className="verify">
                 <img src={verify_img} className="verify-img" alt=""/>
