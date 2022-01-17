@@ -7,6 +7,7 @@ import MyInfo from './screens/MyInfo';
 import CoParentInfo from './screens/CoParentInfo';
 import Dashboard from './screens/Dashboard';
 import calender from './screens/Calender';
+import verify from './screens/Verify';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/" component={Home} exact />
       <Route path="/Signup" component={signup} />
       <Route path="/Signin" component={signin} />
+      <Route path="/Verify" component={verify} />
       <Route path="/CoParentInfo" component={CoParentInfo} />
       <Route path="/ChildInfo" component={ChildInfo} />
       <Route path="/MyInfo" component={MyInfo} />
