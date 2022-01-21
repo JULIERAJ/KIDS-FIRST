@@ -13,6 +13,7 @@ require("dotenv").config();
       is_child: user.is_child,
       is_co_parent: user.is_co_parent,
       is_admin: user.is_admin,
+      createBy:user.createBy
 
     },
     process.env.jwtSecret || 'somethingsecret',

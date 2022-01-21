@@ -9,6 +9,8 @@ const bcrypt = require('bcrypt');
 const generateToken = require('../utils.js');
 const authorize = require("../middleware/authorize")
 const is_parent = require("../middleware/parentAuthorize")
+const jwt = require("jsonwebtoken");
+const nodemailer = require('nodemailer');
 
 const generator = require('generate-password');
 
@@ -47,18 +49,17 @@ router.post(
   })
 );
 
+
 router.post(
-  '/coParent/register', authorize, is_parent,
+  '/coParent/register',
   expressAsyncHandler(async (req, res) => {
 
-    const password = generator.generate({
-      length: 10,
-      numbers: true
-    });
+    let data = req.body;
 
-    const { email, is_co_parent } = req.body;
+    const {firstName, lastName, dateOfBirth, email, is_co_parent,createBy } = req.body;
+    console.log(email,data.email)
 
-    if (email === '' && password === '') {
+    if (email === '') {
       res.status(401).send({ message: 'Please enter Email and Password' });
     } else {
       const user = await CoParent.findOne({ email });
@@ -66,20 +67,53 @@ router.post(
         res.status(401).send({ message: 'CoParent already exists' });
       } else {
         if (!user) {
-          if (password === '' || email === '') {
+          if ( email === '') {
 
             res.status(401).send({ message: 'Please Enter Email and Password .' });
           } else {
-            const token = jwt.sign({ firstName, lastName, dateOfBirth, email, password, is_co_parent }, process.env.JWT_ACC_ACTIVATE, {
-              expiresIn: '20m',
+            const token = jwt.sign({ firstName, lastName, dateOfBirth, email, is_co_parent,createBy }, process.env.JWT_ACC_ACTIVATE, {
+              expiresIn: '30m',
             });
 
+
+            const coParent = new CoParent({
+              createBy: req.body.createBy,
+              firstName: req.body.firstName,
+              lastName: req.body.lastName,
+              dateOfBirth: req.body.dateOfBirth,
+              email: req.body.email,
+              is_co_parent: req.body.is_co_parent,
+            });
+            const createdcoParent = await coParent.save();
+            res.send({
+              _id: createdcoParent._id,
+              createBy: createdcoParent.createBy,
+              firstName: createdcoParent.firstName,
+              lastName: createdcoParent.lastName,
+              dateOfBirth: createdcoParent.dateOfBirth,
+              email: createdcoParent.email,
+              is_co_parent: createdcoParent.is_co_parent,
+              token: generateToken(createdcoParent),
+            });
+        
+
+
+
+
+
+
+
+
+
+
+
+if(email !== "" ){
             let smtpTransport = nodemailer.createTransport({
               service: 'Gmail',
               port: 465,
               auth: {
-                user: '',
-                pass: ''
+                user: 'zainabdeveloper123@gmail.com',
+                pass: 'ziadev2021'
               }
             })
 
@@ -101,6 +135,7 @@ router.post(
             })
             smtpTransport.close();
           }
+          }
 
         }
       }
@@ -108,8 +143,9 @@ router.post(
 
   }));
 
+
 router.post(
-  '/child/register', authorize, is_parent,
+  '/child/register',
   expressAsyncHandler(async (req, res) => {
     const { email } = req.body;
     //check the db to see if you user already exists
@@ -123,7 +159,7 @@ router.post(
       lastName: req.body.lastName,
       dateOfBirth: req.body.dateOfBirth,
       email: req.body.email,
-      password: bcrypt.hashSync(req.body.password, 8),
+     // password: bcrypt.hashSync(req.body.password, 8),
       is_child: req.body.is_child,
       createBy: req.body.createBy,
 
@@ -137,7 +173,7 @@ router.post(
       email: createdChild.email,
       is_child: createdChild.is_child,
       createBy: createdChild.createBy,
-      token: generateToken(createdChild),
+      //token: generateToken(createdChild),
     });
   })
 );

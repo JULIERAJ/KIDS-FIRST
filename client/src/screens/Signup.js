@@ -1,10 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import logo from '../img/kids_first_logo_beta.png'
 import signup from '../img/signup.png';
 import { Navbar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { register } from '../actions/userActions';
 
-export default function Signup() {
+export default function Signup(props) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [is_parent, setIs_parent] = useState(true);
+
+  const dispatch = useDispatch();
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert('Password and confirm password are not matching');
+    }
+    else {
+      dispatch(register(email, password, is_parent));
+      props.history.push('/verify');
+    }
+  };
+
   return (
     <>
       <Navbar>
@@ -24,7 +45,7 @@ export default function Signup() {
 
 
         <div className='form-content-right'>
-          <form className='form' noValidate>
+          <form className='form' onSubmit={submitHandler}>
             <h1 className="form-title">
               Sign up Kids First
             </h1>
@@ -35,7 +56,8 @@ export default function Signup() {
                 className='form-input'
                 type='email'
                 name='email'
-
+                placeholder="example@email.com"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className='form-inputs'>
@@ -43,8 +65,10 @@ export default function Signup() {
               <input
                 className='form-input'
                 type='password'
-                name='password'
-
+                name='password'                
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$"
+                placeholder="********"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className='form-inputs'>
@@ -53,17 +77,17 @@ export default function Signup() {
                 className='form-input'
                 type='password'
                 name='password2'
-
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,20}$"
+                placeholder="********"
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
-            <button className='form-input-btn' type='submit'>
+            <button className='form-input-btn' disabled={!(email && password && confirmPassword)} type='submit'>
               <p className="signup-form">Sign up</p>
             </button>
-
           </form>
         </div>
       </div>
     </>
-
   )
 }

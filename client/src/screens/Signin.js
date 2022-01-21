@@ -1,11 +1,28 @@
-import React from 'react'
 import logo from '../img/kids_first_logo_beta.png'
 import signup from '../img/signup.png';
 import { Navbar, Row, Col,Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { signin } from '../actions/userActions';
+
+export default function Signin(props) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [is_parent, setIs_parent] = useState(true);
 
 
-export default function Signin() {
+  const dispatch = useDispatch();
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+      dispatch(signin(email, password, is_parent));
+      props.history.push('/dashboard');
+    
+  };
+
+
+
     return (
         <>
         <Navbar>
@@ -24,7 +41,7 @@ export default function Signin() {
               <img className='form-img' src={signup} alt='spaceship' />
             </div>
             <div className='form-content-right'>
-              <form className='form' noValidate>
+              <form className='form' onSubmit={submitHandler}>
                 <h1 className="form-title">
                   Log in Kids First
                 </h1>
@@ -34,6 +51,8 @@ export default function Signin() {
                     className='form-input'
                     type='email'
                     name='email'
+                    onChange={(e) => setEmail(e.target.value)}
+
                   />
                 </div>
                 <div className='form-inputs'>
@@ -42,6 +61,8 @@ export default function Signin() {
                     className='form-input'
                     type='password'
                     name='password'
+                    onChange={(e) => setPassword(e.target.value)}
+
                   />
                 </div>
                 <div class="checkbox mb-3">
