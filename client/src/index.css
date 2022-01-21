@@ -1395,7 +1395,61 @@ margin-top: 0px;
   margin-left: 4px;
   margin-top: -10px;
 }
+/*Style for dashboard-childinfo*/
+.dashboardChildinfo{
+  width: 70%;
+  margin-left: 10%;
+  margin-top: -800px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+}
 
+.addButton{
+  margin-left: -25%;
+  margin-top: -1700px;
+}
+
+.childInfoBox{
+  width: 70%;
+  margin-left: 10%;
+  height: 400px;
+  padding: 50px;
+  border-radius: 10px;
+  border: 1px solid #ACD7D9;
+  background: #F8F6E4;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+}
+
+.editButton{
+  margin-top: -10%;
+  height: 35px;
+  width: 70px;
+}
+
+.input-height{
+  height: 25px;
+}
+
+.input-width{
+  width: 225px;
+}
+
+.space-around{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.input-one{
+  width: 100px;
+}
+
+.input-two{
+  width: 500px;
 .DashboardCalendar{
   width: 70%;
   margin-left: 20%;
