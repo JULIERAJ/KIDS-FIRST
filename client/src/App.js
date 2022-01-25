@@ -3,6 +3,7 @@ import signup from './screens/Signup';
 import signin from './screens/Signin';
 import { BrowserRouter, Route } from 'react-router-dom';
 import ChildInfo from './screens/ChildInfo';
+import ChildInformations from './screens/ChildInformations';
 import MyInfo from './screens/MyInfo';
 import CoParentInfo from './screens/CoParentInfo';
 import Dashboard from './screens/Dashboard';
@@ -22,6 +23,7 @@ function App() {
       <Route path="/ChildInfo" component={ChildInfo} />
       <Route path="/MyInfo" component={MyInfo} />
       <Route path="/dashboard" component={Dashboard}/>
+      <Route path="/dashboard/childinformations" component={ChildInformations}/>
       <Route path="/dashboard/childinfo" component={AccessChildInfo}/>
       <Route path="/dashboard/calender" component={calender}/>
 

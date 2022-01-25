@@ -29,8 +29,17 @@ app.use('/api/users', usersRouter);
 
 
 //mongodb connection
-mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/kidsfirst');
-
+mongoose.connect(
+  `mongodb+srv://Hadjira:ilyanna2021@cluster0.kytrp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+   {
+     useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+  }
+).then(() => {
+  console.log('Database connected')
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
