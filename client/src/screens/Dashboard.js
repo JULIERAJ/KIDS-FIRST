@@ -78,6 +78,13 @@ export default function Dashboard() {
                             </a>
                         </li>
                         <li>
+                            <a href=" /dashboard/childinformations" className="nav-link text-dark">
+                                <svg className="bi me-2" width="16" height="16"></svg>
+                                KidsInfo
+                            </a>
+                        </li>
+                       
+                        <li>
                             <a  href="/dashboard/childinfo" className="nav-link text-dark">
                                 <svg className="bi me-2" width="16" height="16"></svg>
                                 Child info
