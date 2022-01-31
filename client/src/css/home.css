@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
-body, html {
+body.home, html.home {
     margin: 0;
     padding: 0;
 }
 
-body {
+body.home {
     display: flex;
     align-content: flex-start;
     flex-direction: column;
