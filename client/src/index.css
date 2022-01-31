@@ -787,7 +787,9 @@ margin-top: 0px;
   margin-left: 4px;
   margin-top: -10px;
 }
-
+/* ======================================
+           Calendar
+   ====================================== */
 .DashboardCalendar{
   width: 70%;
   margin-left: 20%;
@@ -940,26 +942,29 @@ color: #000;
   font-size: 16px !important;
   margin-top: 4px;
 }
-
-/*Style for dashboard-childinfo*/
+ 
+/* ======================================
+         dashboard-childinfo
+   ====================================== */
 .dashboardChildinfo{
   width: 70%;
-  margin-left: 10%;
-  margin-top: -800px;
+  margin-left: 50%;
+  margin-top: -700px;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
 }
+ 
 
 .addButton{
-  margin-left: -25%;
+  margin-left: 25%;
   margin-top: -1700px;
 }
 
 .childInfoBox{
   width: 70%;
-  margin-left: 10%;
+  margin-left: 20%;
   height: 400px;
   padding: 50px;
   border-radius: 10px;
@@ -997,6 +1002,7 @@ color: #000;
 .input-two{
   width: 500px;
 }
+
 .DashboardCalendar{
   width: 70%;
   margin-left: 20%;
@@ -1070,4 +1076,47 @@ input[type="text"]:focus {
 }
 DatePicker {
   font-size: 1em;
+}
+
+/* ======================================
+        childinformatios
+   ====================================== */
+  .child-info-edit-form{
+    position: absolute;
+width: 920px;
+height: 623px;
+left: 0px;
+top: 0px;
+
+  }
+.header-profile-childInfo{
+  width: 20%;
+  margin-left: 20%;
+  margin-top: -700px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+}
+.circle{
+  margin:10px;
+  width:100px;
+  background:#FF0000;
+  height:100px;
+  text-align:center;
+  border-radius:100px;
+   
+}
+.circle-color{
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  padding: 8px;
+
+  background: #fff;
+  border: 2px solid #666;
+  color: #666;
+  text-align: center;
+
+  font: 32px Arial, sans-serif;
 }
