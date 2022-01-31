@@ -12,7 +12,7 @@ import video from '../img/home/video_placeholder.png'
 
 export default function Home() {
     return (
-        <>
+        <div class="home">
             <header class="banner-section" id="header-banner">
                 <div class="header-nav">
                     <div class="site-nav">
@@ -95,6 +95,6 @@ export default function Home() {
                 <a href="#">Our team</a>
             </footer>
 
-        </>
+        </div>
     )
 }

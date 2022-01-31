@@ -1,126 +1,105 @@
 import React from 'react'
+import {Navbar, Nav} from 'react-bootstrap'
+import '../css/dashboard.css'
 import logo from '../img/kids_first_logo_beta.png'
+import home_m_icon_a from '../img/dashboard/home_m_icon_a.png'
+import cal_m_icon from '../img/dashboard/cal_m_icon.png'
+import msg_m_icon from '../img/dashboard/msg_m_icon.png'
+import todo_m_icon from '../img/dashboard/todo_m_icon.png'
+import fin_m_icon from '../img/dashboard/fin_m_icon.png'
+import rep_m_icon from '../img/dashboard/rep_m_icon.png'
+import album_m_icon from '../img/dashboard/album_m_icon.png'
+import settings_m_icon from '../img/dashboard/settings_m_icon.png'
+import help_m_icon from '../img/dashboard/help_m_icon.png'
+
+import user_a_icon_s from '../img/profile/user_a_icon_s.png'
+import child_a_icon_s_1 from '../img/profile/child_a_icon_s_1.png'
+import add_member_m_icon from '../img/dashboard/add_mem_m_icon.png'
+import add_guest_m_icon from '../img/dashboard/add_guest_m_icon.png'
+import option_m_icon from '../img/dashboard/option_m_icon.png'
 
 export default function Dashboard() {
     return (
-        <>
-            <nav class="navbar navbar-expand-lg dashboard-nav">
-                <div class="container-fluid">
-
-                    <button type="button" id="sidebarCollapse" class="navbar-btn">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ">
-
-
-
-                            <div className="dropdown-img">
-                                <a href="#" className="d-flex align-items-center text-dark text-decoration-none " id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <p className="pt-2">Alexandra Roy</p>
-
-                                    <img class="avatar avatar-15  rounded-circle "
-                                        src="https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg" alt=""></img>
-
-                                </a>
-                                <ul className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                                    <li><a className="dropdown-item" href="#">New project...</a></li>
-                                    <li><a className="dropdown-item" href="#">Settings</a></li>
-                                    <li><a className="dropdown-item" href="#">Profile</a></li>
-                                    <li><hr className="dropdown-divider" /></li>
-                                    <li><a className="dropdown-item" href="#">Sign out</a></li>
-                                </ul>
-                            </div>
-
-
-                            {/* <li class="nav-item">
-
-                                <div class="dropdown-img ">
-                                    <button class="dropBtn " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                                        <img class="avatar avatar-15  rounded-circle text-white p-1"
-                                            src="https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg" alt=""></img>
-                                    </button>
-
-                                </div>
-
-                            </li> */}
-                        </ul>
+        <body class="dashboard">
+            <nav class="dashboard">
+                <div class="flex-menu">
+                    <img src={logo} alt="" />
+                    <Nav fill variant="pills" className="flex-column menu">
+                        <Nav.Item>
+                            <img src={home_m_icon_a} alt=""/>
+                            <Nav.Link href="" className="active">Dashboard</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <img src={cal_m_icon} alt=""/>
+                            <Nav.Link href="/dashboard/calendar">Calendar</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <img src={msg_m_icon} alt=""/>
+                            <Nav.Link href="#">Messages</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <img src={todo_m_icon} alt=""/>
+                            <Nav.Link href="#">To-do list</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <img src={fin_m_icon} alt=""/>
+                            <Nav.Link href="#">Finances</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <img src={rep_m_icon} alt=""/>
+                            <Nav.Link href="#">Reports</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <img src={album_m_icon} alt=""/>
+                            <Nav.Link href="#">Album</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                </div>
+                <Nav fill variant="pills" className="flex-column options">
+                    <Nav.Item>
+                        <img src={settings_m_icon} alt=""/>
+                        <Nav.Link href="#">Settings</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <img src={help_m_icon} alt=""/>
+                        <Nav.Link href="#">Help</Nav.Link>
+                    </Nav.Item>
+                </Nav>
+            </nav>
+            <main></main>
+            <div class="dashboard-profile">
+                <div class="dashboard-m1">
+                    <div class="member-label user-label">
+                        <img src={user_a_icon_s}/>Emma Clark
                     </div>
                 </div>
-            </nav>
-            <main>
-                <h1 className="visually-hidden">Sidebars examples</h1>
-
-                <div className=" dashboard-sidebar d-flex flex-column flex-shrink-0 p-3 text-dark ">
-                    <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                        {/* <svg className="bi me-2" width="40" height="32"></svg> */}
-                        <img className="logo-dashboard" src={logo} alt="" />
-                        {/* <span className="fs-4">Sidebar</span> */}
-                    </a>
-                    <ul className="nav nav-pills flex-column mb-auto">
-                        <li className="nav-item">
-                            <a href="#" className="nav-link " aria-current="page">
-                                <svg className="bi me-2" width="16" height="16"></svg>
-                                My Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/dashboard/calender" className="nav-link text-dark">
-                                <svg className="bi me-2" width="16" height="16"></svg>
-                                Calender
-                            </a>
-                        </li>
-                        <li>
-                            <a  href="/dashboard/childinfo" className="nav-link text-dark">
-                                <svg className="bi me-2" width="16" height="16"></svg>
-                                Child info
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="nav-link text-dark">
-                                <svg className="bi me-2" width="16" height="16"></svg>
-                                Family info
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="nav-link text-dark">
-                                <svg className="bi me-2" width="16" height="16"></svg>
-                                Messaging
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="nav-link text-dark">
-                                <svg className="bi me-2" width="16" height="16"></svg>
-                                To do list
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="nav-link text-dark">
-                                <svg className="bi me-2" width="16" height="16"></svg>
-                                Finance tracker
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="nav-link text-dark">
-                                <svg className="bi me-2" width="16" height="16"></svg>
-                                Reports
-                            </a>
-                        </li>
-                    </ul>
-
+                <div class="dashboard-m1">
+                    <div class="profile-option">
+                        <img src={add_member_m_icon}/>Add a co-parent
+                    </div>
                 </div>
-
-
-
-                <div className="b-example-divider"></div>
-            </main>
-        </>
+                <div class="dashboard-m3">
+                    <h1>Our kids</h1>
+                    <div class="member-label">
+                        <img src={child_a_icon_s_1}/>
+                        <a href="/dashboard/childinfo">James</a>
+                    </div>
+                    <div class="profile-option">
+                        <img src={add_member_m_icon}/>Add kid
+                    </div>
+                </div>
+                <div class="dashboard-m2">
+                    <h1>Guests</h1>
+                    <div class="profile-option">
+                        <img src={add_guest_m_icon}/>Add guest users
+                    </div>
+                </div>
+                <div class="dashboard-m1">
+                    <div class="profile-option">
+                        <img class="profile-manage" src={option_m_icon}/>Manage family
+                    </div>
+                </div>
+            </div>
+        </body>
     )
 }
