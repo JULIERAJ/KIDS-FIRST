@@ -3,6 +3,26 @@ KIDS FIRST
 </h1>
  <h2 align = "center">Co=parenting made easier!</h2>
 
+ <p>
+KIDS FIRST is a co-parenting app that aspires to give divorced parents a fair and practical tool  to schedule child custody without conflict. Co-parenting requires a significant level of  communication and cooperation, which can be a challenge for divorced parents that rather not  speak with each other. Lack of communication leads to parents arguing and studies have  shown this can negatively affect their child's upbringing and development. 
+ <p>
+
+ <h3>Instalation Instructions:</h3>
+ <p>
+ pull repository from github
+ **Client Side: 
+ 
+ 1. Install dependencies by running npm install 
+ 2. run 'npm start' 
+ **Server Side:
+
+ 1. Install dependencies by running npm install
+ 2. Update mongoDB connection string in app.js file
+ 3. run 'npm start' 
+ 
+ </p>
+
+
 <p align = "center">
   <img src="https://img.shields.io/npm/v/npm?color=red&logo=npm"/>
   <img src="https://img.shields.io/node/v/jest"/>
